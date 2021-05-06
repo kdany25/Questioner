@@ -1,0 +1,23 @@
+{
+  "name": "questioner",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kdany25/Questioner.git"
+  },
+  "author": "kdany",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kdany25/Questioner/issues"
+  },
+  "homepage": "https://github.com/kdany25/Questioner#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "nodemon": "^2.0.7"
+  }
+}
