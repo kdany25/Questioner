@@ -1,5 +1,6 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import joi  from '@hapi/joi' 
 const user = [
   {
     id: 1,
@@ -15,6 +16,24 @@ const user = [
 ];
 
 export const createuser = async (req, res) => {
+  const schema = joi.object().keys({
+    firstname: joi.string().max(100).required(),
+    lastname: joi.string().max(100).required(),
+    othername: joi.string().max(100).required(),
+    email: joi.string().max(100).required(),
+    phonenumber: joi.string().max(13).required(),
+    username: joi.string().max(100).required(),
+    registered: joi.string().max(100).required(),
+    password: joi.string().max(20).required()
+  })
+  const result = schema.validate(req.body)
+  if (result.error){
+    res.status(400).send(result.error)
+
+    return
+  }
+
+
   const hashp = await bcrypt.hash(req.body.password, 10);
   const us = {
     id: user.length + 1,
@@ -81,9 +100,9 @@ export const getAlluser = (req, res) => {
     res.send({
       status: 200,
       data: [
-        {
+      
           ...user,
-        },
+        
       ],
     });
   } catch (error) {
@@ -124,4 +143,30 @@ export  const deleteuser = (req,res) => {
       }]
     })
   }
-}
+}  
+
+
+export const getspecificuser = (req, res) => {
+  const quest = user.find((me) => me.id === parseInt(req.params.id));
+  if (!quest) res.status(404).send("that user doesnot exist");
+
+  try {
+    res.send({
+      status: 200,
+      data: [
+        {
+          ...quest,
+        },
+      ],
+    });
+  } catch (error) {
+    res.send({
+      status: "error",
+      error: [
+        {
+          error,
+        },
+      ],
+    });
+  }
+};
