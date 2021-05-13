@@ -6,7 +6,7 @@ chai.should();
 chai.use(chaiHttp);
 
 
-//creating user 
+//creating meeting
 describe ('create meeting ',()=>{
     it ("it  should create meetup", (done) =>{
          const me = {
@@ -14,12 +14,14 @@ describe ('create meeting ',()=>{
             createdOn: "12 january" ,
             location : "gisenyi" ,
             Image : "image" ,
-            topic : "ferwafa" ,
+            topic : "ferwafa chogum rwanda " ,
             happeningOn : "15 januay" ,
             tags : "tags"
          }
          chai.request(router).post("/api/v1/createmeeting").send(me).end((err,res)=>{
-             res.body.should.be.a('object')
+          
+          
+           res.body.should.be.a('object')
              res.should.have.status(200)
              res.body.data.should.be.a('array')
              res.body.data[0].should.have.property("createdOn")

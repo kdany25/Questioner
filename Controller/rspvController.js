@@ -1,26 +1,12 @@
-import joi from "@hapi/joi";
 
-const rsvp = [
-  {
-    id: 1,
-    meetup: 3,
-    user: 4,
-    respo: " lorem ipsumasd",
-  },
-];
+
+import rsvp from '../model/rsvp.js'
+
+
 
 export const createrRsvp = (req, res) => {
-  const schema = joi.object().keys({
-    meetup: joi.required(),
-    user: joi.required(),
-    respo: joi.string().required(),
-  });
-  const result = schema.validate(req.body)
-  if (result.error){
-    res.status(400).send(result.error)
-
-    return
-  }
+ 
+  
 
   const rs = {
     id: rsvp.length + 1,

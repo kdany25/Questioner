@@ -8,10 +8,11 @@ import {
   upvote,
   downvote,
 } from "../../Controller/QuestionerController.js";
+import { questionvalidation} from "../../helpers/validation/uservalidation"
 
 const router = express.Router();
 
-router.post("/createquestion", createquestion);
+router.post("/createquestion",questionvalidation, createquestion);
 
 router.get("/questioners", getallquestion);
 

@@ -1,6 +1,8 @@
-  import chai from 'chai'
+import chai from 'chai'
 import chaiHttp from 'chai-http'
 import router from '../index.js';
+
+import {user} from "./MochaData/Userdata"
 
 chai.should();
 chai.use(chaiHttp);
@@ -20,7 +22,12 @@ describe ("get all user",()=>{
             done();
         })
     })
+
+
 })
+
+
+
 
 
 //not get all user
@@ -36,17 +43,7 @@ describe ("get all user",()=>{
 //create user
 describe ('create a user', ()=>{
     it(" create a user",(done)=>{
-      const user = {
-        id: 1,
-        firstname: "iyamuremye",
-        lastname: "david",
-        othername: "dav",
-        email: "dav@gmail.com",
-        phonenumber: "0788898978",
-        username: "dav",
-        registered: "12 january 2019",
-        password: "dfhjfdhsafsbf"
-      }
+      
       chai.request(router).post('/api/v1/signup').send(user).end((err,res)=>{
         // res.should.have.status('success')
         res.body.should.be.a('object')
@@ -55,12 +52,6 @@ describe ('create a user', ()=>{
         res.body.data[0].should.have.property("firstname") 
         res.body.data[0].firstname.should.equal("iyamuremye")
 
-
-
-        
-
-             
-        
   
         done(); 
       })

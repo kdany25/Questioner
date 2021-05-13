@@ -1,36 +1,11 @@
 import joi from '@hapi/joi'
 
-const meetup = [
-  {
-    id: 1,
-    createdOn: "12 january",
-    location: "gisenyi",
-    Image: "image",
-    topic: "ferwafa",
-    happeningOn: "15 januay",
-    tags: "tags",
-  },
-];
+import meetup from '../model/meetup.js'
 
 export const createmeeting = async (req, res) => {
 
-  const schema = joi.object().keys({
-    createdOn: joi.string().max(100).required(),
-    location: joi.string().max(100).required(),
-    Image: joi.string().max(100).required(),
-    topic: joi.string().min(10).required(),
-    happeningOn: joi.string().max(100).required(),
-    tags: joi.string().max(100).required(),
-
-    
-
-  })
-  const result = schema.validate(req.body)
-  if (result.error){
-    res.status(400).send(result.error)
-
-    return
-  }
+  
+  
   const meet = {
     id: meetup.length + 1,
     createdOn: req.body.createdOn,
@@ -121,6 +96,7 @@ export const deleteMeeting = (req, res) => {
   } catch (error) {
     res.send({
       status: "error",  
+      
       error: [
         {
           error,
@@ -129,3 +105,8 @@ export const deleteMeeting = (req, res) => {
     });
   }
 };
+
+
+
+
+

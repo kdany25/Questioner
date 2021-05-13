@@ -1,38 +1,11 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import joi  from '@hapi/joi' 
-const user = [
-  {
-    id: 1,
-    firstname: "iyamuremye",
-    lastname: "david",
-    othername: "dav",
-    email: "dav@gmail.com",
-    phonenumber: "0788898978",
-    username: "dav",
-    registered: "12 january 2019",
-    password: "dfhjfdhsafsbf"
-  }
-];
+import user from '../model/user.js'
+
 
 export const createuser = async (req, res) => {
-  const schema = joi.object().keys({
-    firstname: joi.string().max(100).required(),
-    lastname: joi.string().max(100).required(),
-    othername: joi.string().max(100).required(),
-    email: joi.string().max(100).required(),
-    phonenumber: joi.string().max(13).required(),
-    username: joi.string().max(100).required(),
-    registered: joi.string().max(100).required(),
-    password: joi.string().max(20).required()
-  })
-  const result = schema.validate(req.body)
-  if (result.error){
-    res.status(400).send(result.error)
-
-    return
-  }
-
+ 
 
   const hashp = await bcrypt.hash(req.body.password, 10);
   const us = {
@@ -49,6 +22,7 @@ export const createuser = async (req, res) => {
 
   const token = jwt.sign(us, process.env.ACCESS_TOKEN_SECRET, {
     expiresIn: 604800,
+
   });
 
   try {
@@ -144,6 +118,14 @@ export  const deleteuser = (req,res) => {
     })
   }
 }  
+
+
+
+
+
+
+
+
 
 
 export const getspecificuser = (req, res) => {

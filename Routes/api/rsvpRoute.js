@@ -6,9 +6,11 @@ import {
   getallresponse,
   getepcificRsvp,
 } from "../../Controller/rspvController.js";
+
+import {rsvpvalidation } from "../../helpers/validation/uservalidation"
 const router = express.Router();
 
-router.post("/creatersvp", createrRsvp);
+router.post("/creatersvp", rsvpvalidation, createrRsvp);
 
 router.get("/Rsvp", getallresponse);
 
@@ -21,3 +23,4 @@ export default router;
 
     
  
+

@@ -1,31 +1,14 @@
-import joi from "@hapi/joi";
-const question = [
-  {
-    id: 1,
-    createdOn: "1 january ",
-    createdBy: "clet",
-    meetup: "chogum",
-    title: "lorem",
-    body: "lorem ipsum sbdhsbasd",
-    votes: 23,
-  },
-];
+import joi from '@hapi/joi'
 
-export const createquestion = async (req, res) => {
-  const schema = joi.object().keys({
-    createdOn: joi.string().max(100).required(),
-    createdBy: joi.string().max(100).required(),
-    meetup: joi.string().max(100).required(),
-    title: joi.string().max(100).required(),
-    body: joi.string().min(15).required(),
-    votes: joi().required(),
-  });
-  const result = schema.validate(req.body)
-  if (result.error){
-    res.status(400).send(result.error)
+import question from '../model/questioner.js'
 
-    return
-  }
+
+export const createquestion = async  (req, res) => {    
+
+  // console.log(req.body)
+  
+  
+
   const que = {
     id: question.length + 1,
     createdOn: req.body.createdOn,
@@ -36,7 +19,11 @@ export const createquestion = async (req, res) => {
     votes: req.body.votes,
   };
 
+
+
+
   try {
+    
     question.push(que);
     res.send({
       status: 200,
@@ -48,6 +35,7 @@ export const createquestion = async (req, res) => {
     });
   } catch (error) {
     res.send({
+
       status: "error",
       error: [
         {
@@ -132,6 +120,11 @@ export const upvote = (req, res) => {
   que.votes = que.votes + 1;
   res.send(que);
 };
+
+
+
+
+
 
 export const downvote = (req, res) => {
   const que = question.find((q) => q.id === parseInt(req.params.id));
